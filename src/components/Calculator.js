@@ -8,7 +8,7 @@ const Calculator = () => {
   useEffect(() => {
     let opArray = disply.split(" ")
     let emp = opArray.indexOf("")
-    if (emp === -1) {
+    if (emp === -1 && opArray.length > 1) {
       setACC(Calculat(opArray))
     }
   }, [disply])
