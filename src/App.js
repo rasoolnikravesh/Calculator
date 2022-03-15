@@ -3,7 +3,7 @@ import Calculator from './components/Calculator';
 
 const App = () => {
   return (
-    <div className=' min-h-screen justify-center flex items-center'>
+    <div className='min-h-screen justify-center flex items-center'>
       <Calculator />
     </div>
   );
