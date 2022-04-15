@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react"
 import { Calculat } from "../utility/calculator";
+
 import styles from "./Calculator.module.css"
+import Disply from "./Disply";
+
+
 const Calculator = () => {
-  const [acc, setACC] = useState(0)
-  const [disply, setDisply] = useState("0")
+  const [acc, setACC] = useState("")
+  const [disply, setDisply] = useState("")
 
   useEffect(() => {
     let opArray = disply.split(" ")
@@ -73,13 +77,9 @@ const Calculator = () => {
     }
   }
 
-  const displyChangeHandler = event => {
-    setDisply(event.target.value)
-  }
 
-  const accChangeHandler = event => {
-    setACC(event.target.value)
-  }
+
+
   const opHandler = event => {
     const { name } = event.target;
     if (name === "+") {
@@ -92,16 +92,23 @@ const Calculator = () => {
       setDisply(p => p + " / ")
     }
   }
+  const acClickHandler = () => {
+    setDisply("")
+    setACC("")
+  }
   const opClickHandler = () => {
 
   }
   return (
     <div className='grid grid-cols-4 gap-2'>
       <div className='col-span-4'>
-        <input value={disply} disabled onChange={displyChangeHandler} className='focus:outline-none text-xl bg-transparent border-b-2 border-blue-400 w-full h-8 font-medium ' />
+        <Disply text={disply} subText={acc} />
       </div>
-      <div className="col-span-4">
-        <input value={acc} disabled onChange={accChangeHandler} className="focus:outline-none text-base bg-transparent border-b-2 border-green-400 w-full h-4 font-medium" />
+      <div className="grid-cols-4 col-span-4 gap-2 flex-row-reverse flex ">
+        <button className={styles.btn} onClick={acClickHandler}>AC</button>
+        <button className={styles.btn}>C</button>
+        <button className={styles.btn}>)</button>
+        <button className={styles.btn}>(</button>
       </div>
       <div className='grid grid-cols-3 gap-2 col-span-3'>
         <button onClick={btnNumClickHandler} name='btnNum1' className={styles.btn}>1</button>
@@ -113,16 +120,15 @@ const Calculator = () => {
         <button onClick={btnNumClickHandler} name='btnNum7' className={styles.btn}>7</button>
         <button onClick={btnNumClickHandler} name='btnNum8' className={styles.btn}>8</button>
         <button onClick={btnNumClickHandler} name='btnNum9' className={styles.btn}>9</button>
+        <button onClick={btnNumClickHandler} className={styles.btn}>.</button>
         <button onClick={btnNumClickHandler} name='btnNum0' className={styles.btn}>0</button>
+        <button className={styles.btn} onClick={opClickHandler}>=</button>
       </div>
       <div className='grid grid-cols-1 gap-2 col-span-1'>
         <button className={styles.btn} name="+" onClick={opHandler}>+</button>
         <button className={styles.btn} name="-" onClick={opHandler}>-</button>
         <button className={styles.btn} name="*" onClick={opHandler}>*</button>
         <button className={styles.btn} name="/" onClick={opHandler}>/</button>
-      </div>
-      <div className='col-start-4 '>
-        <button className={styles.btn} onClick={opClickHandler}>=</button>
       </div>
     </div>
   );
